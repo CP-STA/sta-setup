@@ -8,6 +8,8 @@ The machines in the labs can be quite difficult to work with sometimes especiall
 
 And then restart your shell for it to take effect.
 
+![Screenshot](./screenshot.png)
+
 # Troubleshooting
 1. Build failure with `brew install`.
 
