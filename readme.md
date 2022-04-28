@@ -1,5 +1,5 @@
 # Introduction
-The machines in the labs can be quite difficult to work with sometimes especially with broken gcc complier, no package manager, and chsh not working. This script tries to side step the problem with homebrew, which can install packages in user space. It also comes with some (opinionated) niceties like oh-my-zsh, syntax highlighting and auto completion, which are quite useful. 
+The machines in the labs can sometimes be quite difficult to work especially with broken a gcc complier, and no package manager. This scripts sets up homebrew as your package manager, installs a working gcc-11, and a nice shell environment. 
 
 # Installation
 ```bash
@@ -7,6 +7,14 @@ The machines in the labs can be quite difficult to work with sometimes especiall
 ```
 
 And then restart your shell for it to take effect.
+
+# Features
+1. linuxbrew, with which you can install up-to-date packages without asking admins.
+2. A working and up-to-date gcc complier.
+3. zsh: nicer experience than bash overall.
+4. Syntax highting in shell.
+5. Autocompletion in shell: it remembers your recent commands and autocompletes the shell command.
+6. git stats: ti shows you which branch you are on in the command prompt, changes, untracked files, upstream and local difference, etc. 
 
 # What it looks like after installation
 ![Screenshot](./screenshot.png)
