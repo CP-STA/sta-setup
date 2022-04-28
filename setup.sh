@@ -39,7 +39,7 @@ if [ -f "${HOME}/.zshrc" ]; then
     echo "~/.zshrc exists, moving it to ~/${ZSHRC_BACKUP_REL}"
     mv ${HOME}/.zshrc ${ZSHRC_BACKUP}
 fi
-curl -fsSL https://raw.githubusercontent.com/STAOJ/sta-setup/master/.zshrc > .zshrc
+curl -fsSL https://raw.githubusercontent.com/STAOJ/sta-setup/master/.zshrc > ${HOME}/.zshrc
 
 if [ -f "${HOME}/.p10k.zsh" ]; then
   P10K_BACKUP="${HOME}/.p10k.zsh.backup"
@@ -50,7 +50,7 @@ if [ -f "${HOME}/.p10k.zsh" ]; then
     echo "~/.p10k.zsh exists, moving it to ~/${P10K_BACKUP_REL}"
     mv ${HOME}/.p10k.zsh ${P10K_BACKUP}
 fi
-curl -fsSL https://raw.githubusercontent.com/STAOJ/sta-setup/master/.p10k.zsh > .p10k.zsh
+curl -fsSL https://raw.githubusercontent.com/STAOJ/sta-setup/master/.p10k.zsh > ${HOME}/.p10k.zsh
 
 if [ "$NO_SHELL" = true ]; then
   echo "Install successful, you don't seem to be using either bash or zsh so I can't figure out how to change your shell to zsh. Using zsh is not necessary, but it has some nice things installed like syntax highlighting and auto completion"
