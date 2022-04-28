@@ -41,9 +41,9 @@ if [ -f "${HOME}/.zshrc" ]; then
   mv ${HOME}/.zshrc ${ZSHRC_BACKUP}
 fi
 
-NO_ZSHRC = false
+NO_ZSHRC=false
 if [ -f "${HOME}/.zshrc" ]; then
-  NO_ZSHRC = true
+  NO_ZSHRC=true
 else
   curl -fsSL https://raw.githubusercontent.com/STAOJ/sta-setup/master/.zshrc > ${HOME}/.zshrc
 fi
@@ -58,9 +58,9 @@ if [ -f "${HOME}/.p10k.zsh" ]; then
   mv ${HOME}/.p10k.zsh ${P10K_BACKUP}
 fi
 
-NO_P10K = false
+NO_P10K=false
 if [ -f "${HOME}/.p10k.zsh" ]; then
-  NO_P10K = true 
+  NO_P10K=true 
 else
   curl -fsSL https://raw.githubusercontent.com/STAOJ/sta-setup/master/.p10k.zsh > ${HOME}/.p10k.zsh
 fi
@@ -73,6 +73,6 @@ if [ "$NO_ZSHRC" = true ]; then
   echo "~/.zshrc already exists and we are unable to create an backup of it. So the recommended ~/.zshrc is not install. To install it, consider removing your ~/.zshrc and run the script again."
 fi
 
-if [ "NO_P10K" = true ]; then 
+if [ "$NO_P10K" = true ]; then 
   echo "~/.p10k.zsh already exists and we are unable to create an backup of it. So the recommended ~/.p10k.zsh is not install. To install it, consider removing your ~/.p10k.zsh and run the script again."
 fi
