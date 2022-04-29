@@ -24,9 +24,19 @@ And then restart your shell for it to take effect.
 
     The make complier on the lab machines is a bit broken. We haven't found a way to fix it yet, but you can workaround many build failures with `brew install --force-bottle` to use a "bottle" (pre-complied binary). Homebrew defaults to building from source because it is not installed in `/home/linuxbrew/.linuxbrew` (for which you don't have write permission). 
 
-2. Problem with PATH.
+2. The system default package are still being called in shell after installing a different version in homebrew
 
-    Try to add the PATH in `~/.profile`, which will get loaded.
+    try to do
+    ```bash 
+    $ brew link <package>
+    ```
+    and restart your shell session.
+
+    You also need to make sure that `~/.linuxbrew/bin` is in PATH (which should be if the setup is successful). 
+
+3. Problem with PATH.
+
+    Try to add the PATH you need into `~/.profile`, which will get loaded.
 
 # Uninstallation
 Just remove `~/.linuxbrew`. It will also remove every packages you installed with homebrew.
