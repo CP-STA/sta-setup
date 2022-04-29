@@ -3,8 +3,7 @@
 cd ${HOME}
 git clone https://github.com/Homebrew/brew ${HOME}/.linuxbrew
 .linuxbrew/bin/brew update --force --quiet
-echo 'eval "$(.linuxbrew/bin/brew shellenv)"' >> ${HOME}/.profile
-eval "$(.linuxbrew/bin/brew shellenv)"
+eval "$(${HOME}/.linuxbrew/bin/brew shellenv)"
 brew install --force-bottle binutils
 brew install --force-bottle gcc
 brew install zsh
