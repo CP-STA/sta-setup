@@ -33,6 +33,8 @@ Just remove `~/.linuxbrew`. It will also remove every packages you installed wit
 
 You should also removed the line in `~/.bashrc` that reads `/home/aa001/.linuxbrew/bin/zsh` where `aa001` is your username.
 
+You can also remove `~/.zshrc` and `~/.p10k.zsh` though not removing them won't have much effect. 
+
 # Customization
 The theme used is powerlevel10k, applied on oh-my-zsh. the font for p10k is chosen for the compatibility. If you want to customize the prompt look, run `p10k configure`. 
 

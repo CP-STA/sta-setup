@@ -17,7 +17,6 @@ ln -s c++-11 c++
 cd ${HOME}
 NO_SHELL=false
 if [ -n "$BASH_VERSION" ]; then
-  echo "export SHELL=$(which zsh)" >> ${HOME}/.bashrc
   echo "$(which zsh)" >> ${HOME}/.bashrc
 elif [ -n "$ZSH_VERSION" ]; then
   :
