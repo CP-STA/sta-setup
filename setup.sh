@@ -36,7 +36,7 @@ if [ -f "${HOME}/.zshrc" ]; then
   done
   ZSHRC_BACKUP_REL=$(realpath --relative-to="${HOME}" "${ZSHRC_BACKUP}")
   echo "~/.zshrc exists, moving it to ~/${ZSHRC_BACKUP_REL}"
-  mv ${HOME}/.zshrc ${ZSHRC_BACKUP}
+  mv ${HOME}/.zshrc ${HOME}/${ZSHRC_BACKUP}
 fi
 
 NO_ZSHRC=false
@@ -53,7 +53,7 @@ if [ -f "${HOME}/.p10k.zsh" ]; then
   done
   P10K_BACKUP_REL=$(realpath --relative-to="${HOME}" "${P10K_BACKUP}")
   echo "~/.p10k.zsh exists, moving it to ~/${P10K_BACKUP_REL}"
-  mv ${HOME}/.p10k.zsh ${P10K_BACKUP}
+  mv ${HOME}/.p10k.zsh ${HOME}/${P10K_BACKUP}
 fi
 
 NO_P10K=false
