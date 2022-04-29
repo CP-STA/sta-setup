@@ -36,7 +36,7 @@ if [ -f "${HOME}/.zshrc" ]; then
   done
   ZSHRC_BACKUP_REL=$(realpath --relative-to="${HOME}" "${ZSHRC_BACKUP}")
   echo "~/.zshrc exists, moving it to ~/${ZSHRC_BACKUP_REL}"
-  mv ${HOME}/.zshrc ${HOME}/${ZSHRC_BACKUP}
+  mv ${HOME}/.zshrc ${ZSHRC_BACKUP}
 fi
 
 NO_ZSHRC=false
@@ -53,7 +53,7 @@ if [ -f "${HOME}/.p10k.zsh" ]; then
   done
   P10K_BACKUP_REL=$(realpath --relative-to="${HOME}" "${P10K_BACKUP}")
   echo "~/.p10k.zsh exists, moving it to ~/${P10K_BACKUP_REL}"
-  mv ${HOME}/.p10k.zsh ${HOME}/${P10K_BACKUP}
+  mv ${HOME}/.p10k.zsh ${P10K_BACKUP}
 fi
 
 NO_P10K=false
@@ -68,9 +68,9 @@ if [ "$NO_SHELL" = true ]; then
 fi
 
 if [ "$NO_ZSHRC" = true ]; then
-  echo "~/.zshrc already exists and we are unable to create an backup of it. So the recommended ~/.zshrc is not install. To install it, consider removing your ~/.zshrc and run the script again."
+  echo "~/.zshrc already exists and we are unable to create an backup of it. So the recommended ~/.zshrc was not installed. To install it, consider removing your ~/.zshrc and run \n    curl -fsSL https://raw.githubusercontent.com/STAOJ/sta-setup/master/.zshrc > ${HOME}/.zshrc"
 fi
 
 if [ "$NO_P10K" = true ]; then 
-  echo "~/.p10k.zsh already exists and we are unable to create an backup of it. So the recommended ~/.p10k.zsh is not install. To install it, consider removing your ~/.p10k.zsh and run the script again."
+  echo "~/.p10k.zsh already exists and we are unable to create an backup of it. So the recommended ~/.p10k.zsh was not installed. To install it, consider removing your ~/.p10k.configure and run \n     curl -fsSL https://raw.githubusercontent.com/STAOJ/sta-setup/master/.p10k.zsh > ${HOME}/.p10k.zsh"
 fi
