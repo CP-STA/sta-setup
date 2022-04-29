@@ -107,6 +107,7 @@ source $ZSH/oh-my-zsh.sh
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+SHELL="${HOME}/.linuxbrew/bin/zsh"
 eval "$(${HOME}/.linuxbrew/bin/brew shellenv)"
 if [ -f ~/.profile ]; then
     source ~/.profile

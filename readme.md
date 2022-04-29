@@ -28,6 +28,11 @@ And then restart your shell for it to take effect.
 
     Try to add the PATH in `~/.profile`, which will get loaded.
 
+# Uninstallation
+Just remove `~/.linuxbrew`. It will also remove every packages you installed with homebrew.
+
+You should also removed the line in `~/.bashrc` that reads `/home/aa001/.linuxbrew/bin/zsh` where `aa001` is your username.
+
 # Customization
 The theme used is powerlevel10k, applied on oh-my-zsh. the font for p10k is chosen for the compatibility. If you want to customize the prompt look, run `p10k configure`. 
 
