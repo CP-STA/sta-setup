@@ -17,18 +17,6 @@ stasetup::install_brew () {
     .linuxbrew/bin/brew update --force --quiet
     eval "$(${HOME}/.linuxbrew/bin/brew shellenv)"
     brew install --force-bottle binutils
-}
-
-
-#######################################
-# Installs the latest gcc version from brew.
-# Globals:
-#   HOMEBREW_PREFIX
-# Arguments:
-#   None
-#######################################
-
-stasetup::install_gcc () {
     brew install --force-bottle gcc
     cd ${HOMEBREW_PREFIX}/bin
     ln -s gcc-11 gcc 
