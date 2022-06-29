@@ -16,6 +16,8 @@ This script can also be used just to install brew without zsh.
 bash <(curl -fsSl https://raw.githubusercontent.com/CP-STA/sta-setup/master/setup.sh) -B
 ```
 
+Add `eval "$($HOME/.linuxbrew/bin/brew shellenv)"` to the end of your `~/.bashrc` file.
+
 # Features
 1. linuxbrew, with which you can install up-to-date packages without asking admins.
 2. A working and up-to-date gcc complier.
