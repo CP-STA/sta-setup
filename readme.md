@@ -8,6 +8,14 @@ The machines in the labs can sometimes be quite difficult to work especially wit
 
 And then restart your shell for it to take effect.
 
+## Brew only installation
+
+This script can also be used just to install brew without zsh.
+
+```bash
+bash -c "$(curl -fsSl https://raw.githubusercontent.com/STAOJ/sta-setup/master/setup.sh)" -- -h
+```
+
 # Features
 1. linuxbrew, with which you can install up-to-date packages without asking admins.
 2. A working and up-to-date gcc complier.
