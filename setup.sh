@@ -118,20 +118,9 @@ usage () {
 }
 
 # run if the script is directly executed (not sourced)
-
- # See https://stackoverflow.com/a/28776166
- is_sourced() {
-   if [ -n "$ZSH_VERSION" ]; then 
-       case $ZSH_EVAL_CONTEXT in *:file:*) return 0;; esac
-   else  # Add additional POSIX-compatible shell names here, if needed.
-       case ${0##*/} in dash|-dash|bash|-bash|ksh|-ksh|sh|-sh) return 0;; esac
-   fi
-   return 1  # NOT sourced.
- }
-
-
-if [ "$(is_sourced)" = true ]; then 
+if [ "${BASH_SOURCE[0]}" == "$0" ]; then 
     install_zsh=true
+    
     while getopts "hB" arg; do
         case $arg in
             h) usage; exit 0;;
