@@ -41,7 +41,7 @@ stasetup::install_brew () {
 
 stasetup::install_zsh () {
     originaldir=$(pwd)
-    
+
     ## copied from old setup script, with brew bits removed
     cd ${HOME}
     NO_SHELL=false
@@ -131,7 +131,6 @@ if [ "${BASH_SOURCE[0]}" == "$0" ]; then
 
     echo "Installing brew"
     stasetup::install_brew
-    stasetup::install_gcc
     
     if [[ $install_zsh = true ]]; then
         echo "Installing zsh"
