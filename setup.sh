@@ -13,8 +13,9 @@
 #######################################
 
 stasetup::install_brew () {
+    originaldir=$(pwd)
     git clone https://github.com/Homebrew/brew ${HOME}/.linuxbrew
-    .linuxbrew/bin/brew update --force --quiet
+    ${HOME}/.linuxbrew/bin/brew update --force --quiet
     eval "$(${HOME}/.linuxbrew/bin/brew shellenv)"
     brew install --force-bottle binutils
     brew install --force-bottle gcc
@@ -23,6 +24,8 @@ stasetup::install_brew () {
     ln -s g++-11 g++ 
     ln -s cpp-11 cpp 
     ln -s c++-11 c++
+
+    cd "$originaldir"
 }
 
 #######################################
@@ -37,6 +40,8 @@ stasetup::install_brew () {
 #######################################
 
 stasetup::install_zsh () {
+    originaldir=$(pwd)
+    
     ## copied from old setup script, with brew bits removed
     cd ${HOME}
     NO_SHELL=false
@@ -98,6 +103,8 @@ stasetup::install_zsh () {
     if [ "$NO_P10K" = true ]; then 
     echo "~/.p10k.zsh already exists and we are unable to create an backup of it. So the recommended ~/.p10k.zsh was not installed. To install it, consider removing your ~/.p10k.configure and run \n     curl -fsSL https://raw.githubusercontent.com/STAOJ/sta-setup/master/.p10k.zsh > ${HOME}/.p10k.zsh"
     fi
+
+    cd "$originaldir"
 }
 
 
