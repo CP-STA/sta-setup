@@ -119,12 +119,12 @@ usage () {
 
 # run if the script is directly executed (not sourced)
 if [ "${BASH_SOURCE[0]}" == "$0" ]; then 
-    install_zsh=$(true)
+    install_zsh=true
     
     while getopts "hB" arg; do
         case $arg in
             h) usage; exit 0;;
-            B) install_zsh=$(false);;
+            B) install_zsh=false;;
             *) echo "invalid arguments"; usage; exit 1;;
         esac
     done
@@ -132,7 +132,7 @@ if [ "${BASH_SOURCE[0]}" == "$0" ]; then
     echo "Installing brew"
     stasetup::install_brew
     
-    if [[ $install_zsh = true ]]; then
+    if [ "$install_zsh" = true ]; then
         echo "Installing zsh"
         stasetup::install_zsh
     fi
