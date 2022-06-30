@@ -16,7 +16,7 @@
 add_to_rc () {
     for shell_file in "$HOME/.bashrc" "$HOME/.zshrc"; do
         if  [ -f "$shell_file" ]; then
-            append_if_not_present $1 $shell_file
+            append_if_not_present "$1" "$shell_file"
         fi
     done
 }
@@ -29,7 +29,7 @@ add_to_rc () {
 #######################################
 
 append_if_not_present () {
-grep -qx $1 $2 || echo $1 >> $2
+grep -qx "$1" "$2" || echo "$1" >> "$2"
 }
 
 #######################################
@@ -43,17 +43,19 @@ grep -qx $1 $2 || echo $1 >> $2
 stasetup::install_brew () {
     set -e 
     originaldir=$(pwd)
+    if [ ! -d "$HOME/.linuxbrew" ]; then
+        git clone https://github.com/Homebrew/brew "$HOME/.linuxbrew"
+    fi
 
-    git clone https://github.com/Homebrew/brew ${HOME}/.linuxbrew
     $HOME/.linuxbrew/bin/brew update --force --quiet
     eval "$($HOME/.linuxbrew/bin/brew shellenv)"
     brew install --force-bottle binutils
     brew install --force-bottle gcc
     cd "$HOMEBREW_PREFIX/bin"
-    ln -s gcc-11 gcc 
-    ln -s g++-11 g++ 
-    ln -s cpp-11 cpp 
-    ln -s c++-11 c++
+    ln -sf gcc-11 gcc 
+    ln -sf g++-11 g++ 
+    ln -sf cpp-11 cpp 
+    ln -sf c++-11 c++
 
 
     add_to_rc 'eval "$($HOME/.linuxbrew/bin/brew shellenv)"'
