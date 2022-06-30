@@ -82,9 +82,9 @@ stasetup::install_zsh () {
     cd ${HOME}
     NO_SHELL=false
     if [ -n "$BASH_VERSION" ]; then
-    echo "$(which zsh)" >> ${HOME}/.bashrc
+        append_if_not_present "$(which zsh)" "${HOME}/.bashrc"
     elif [ -n "$ZSH_VERSION" ]; then
-    :
+        :
     else
     NO_SHELL=true
     fi
@@ -145,7 +145,7 @@ stasetup::install_zsh () {
 
 
 usage () {
-    echo "setup.sh -hB
+    echo "setup.sh [-hB]
     
     FLAGS:
       -h  Show this help message, and exit.
