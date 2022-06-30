@@ -5,6 +5,34 @@
 # Usage: see -h / usage()
 
 #######################################
+# Adds the specified string to the shell-rc files if it doesn't already exist.
+# This adds the specified string to both .zshrc and .bashrc if they exist.
+# Globals:
+#   HOME
+# Arguments:
+#   $1: the string to be added to .bashrc.
+#######################################
+
+add_to_rc () {
+    for shell_file in "$HOME/.bashrc" "$HOME/.zshrc"; do
+        if  [ -f "$shell_file" ]; then
+            append_if_not_present $1 $shell_file
+        fi
+    done
+}
+
+#######################################
+# Adds the given string to the given file if it doesn't already exist.
+# Arguments:
+#   $1: the string to be added to the file.
+#   $2: the path to the file.
+#######################################
+
+append_if_not_present () {
+grep -qx $1 $2 || echo $1 >> $2
+}
+
+#######################################
 # Installs brew under the local user from git.
 # Globals:
 #   HOME
@@ -13,19 +41,25 @@
 #######################################
 
 stasetup::install_brew () {
+    set -e 
     originaldir=$(pwd)
+
     git clone https://github.com/Homebrew/brew ${HOME}/.linuxbrew
-    ${HOME}/.linuxbrew/bin/brew update --force --quiet
-    eval "$(${HOME}/.linuxbrew/bin/brew shellenv)"
+    $HOME/.linuxbrew/bin/brew update --force --quiet
+    eval "$($HOME/.linuxbrew/bin/brew shellenv)"
     brew install --force-bottle binutils
     brew install --force-bottle gcc
-    cd ${HOMEBREW_PREFIX}/bin
+    cd "$HOMEBREW_PREFIX/bin"
     ln -s gcc-11 gcc 
     ln -s g++-11 g++ 
     ln -s cpp-11 cpp 
     ln -s c++-11 c++
 
+
+    add_to_rc 'eval "$($HOME/.linuxbrew/bin/brew shellenv)"'
+
     cd "$originaldir"
+    set +e
 }
 
 #######################################
@@ -111,9 +145,9 @@ stasetup::install_zsh () {
 usage () {
     echo "setup.sh -hB
     
-    Options:
-    -h  Show this help message, and exit.
-    -B  Only install brew not zsh.
+    FLAGS:
+      -h  Show this help message, and exit.
+      -B  Only install brew not zsh.
     "
 }
 
