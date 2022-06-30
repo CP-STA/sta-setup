@@ -51,10 +51,10 @@ stasetup::install_brew () {
     brew install --force-bottle binutils
     brew install --force-bottle gcc
     cd "$HOMEBREW_PREFIX/bin"
-    ln -sf gcc-11 gcc 
-    ln -sf g++-11 g++ 
-    ln -sf cpp-11 cpp 
-    ln -sf c++-11 c++
+    [ -e gcc ] || ln -s gcc-11 gcc 
+    [ -e g++ ] || ln -s g++-11 g++ 
+    [ -e cpp ] || ln -s cpp-11 cpp 
+    [ -e c++ ] || ln -s c++-11 c++
 
 
     add_to_rc 'eval "$($HOME/.linuxbrew/bin/brew shellenv)"'
