@@ -41,7 +41,6 @@ grep -qx "$1" "$2" || echo "$1" >> "$2"
 #######################################
 
 stasetup::install_brew () {
-    set -e 
     originaldir=$(pwd)
     if [ ! -d "$HOME/.linuxbrew" ]; then
         git clone https://github.com/Homebrew/brew "$HOME/.linuxbrew"
@@ -61,7 +60,6 @@ stasetup::install_brew () {
     add_to_rc 'eval "$($HOME/.linuxbrew/bin/brew shellenv)"'
 
     cd "$originaldir"
-    set +e
 }
 
 #######################################
