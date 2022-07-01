@@ -29,7 +29,7 @@ add_to_rc () {
 #######################################
 
 append_if_not_present () {
-grep -qx "$1" "$2" || echo "$1" >> "$2"
+grep -qxF "$1" "$2" || echo "$1" >> "$2"
 }
 
 #######################################
@@ -80,7 +80,9 @@ stasetup::install_zsh () {
     cd ${HOME}
     NO_SHELL=false
     if [ -n "$BASH_VERSION" ]; then
-        append_if_not_present "$(which zsh)" "${HOME}/.bashrc"
+        first='[[ $- != *i* ]] || '
+        second="$(which zsh)"
+        append_if_not_present "$first$second" "${HOME}/.bashrc"
     elif [ -n "$ZSH_VERSION" ]; then
         :
     else
