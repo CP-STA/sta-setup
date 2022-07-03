@@ -2,7 +2,7 @@
 
 # Install zsh and/or brew, configured for St Andrews CS lab PCs / host servers.
 
-# Usage: see -h / usage()
+# stasetup::usage: see -h / stasetup::usage()
 
 #######################################
 # Adds the specified string to the shell-rc files if it doesn't already exist.
@@ -13,10 +13,10 @@
 #   $1: the string to be added to .bashrc.
 #######################################
 
-add_to_rc () {
+stasetup::add_to_rc () {
     for shell_file in "$HOME/.bashrc" "$HOME/.zshrc"; do
         if  [ -f "$shell_file" ]; then
-            append_if_not_present "$1" "$shell_file"
+            stasetup::append_if_not_present "$1" "$shell_file"
         fi
     done
 }
@@ -28,7 +28,7 @@ add_to_rc () {
 #   $2: the path to the file.
 #######################################
 
-append_if_not_present () {
+stasetup::append_if_not_present () {
 grep -qxF "$1" "$2" || echo "$1" >> "$2"
 }
 
@@ -41,6 +41,7 @@ grep -qxF "$1" "$2" || echo "$1" >> "$2"
 #######################################
 
 stasetup::install_brew () {
+    local originaldir
     originaldir=$(pwd)
     if [ ! -d "$HOME/.linuxbrew" ]; then
         git clone https://github.com/Homebrew/brew "$HOME/.linuxbrew"
@@ -57,7 +58,7 @@ stasetup::install_brew () {
     [ -e c++ ] || ln -s c++-11 c++
 
 
-    add_to_rc 'eval "$($HOME/.linuxbrew/bin/brew shellenv)"'
+    stasetup::add_to_rc 'eval "$($HOME/.linuxbrew/bin/brew shellenv)"'
 
     cd "$originaldir"
 }
@@ -74,15 +75,19 @@ stasetup::install_brew () {
 #######################################
 
 stasetup::install_zsh () {
+    local originaldir
     originaldir=$(pwd)
 
     ## copied from old setup script, with brew bits removed
     cd ${HOME}
+    local NO_SHELL
     NO_SHELL=false
     if [ -n "$BASH_VERSION" ]; then
+        local first
         first='[[ $- != *i* ]] || '
+        local second
         second="$(which zsh)"
-        append_if_not_present "$first$second" "${HOME}/.bashrc"
+        stasetup::append_if_not_present "$first$second" "${HOME}/.bashrc"
     elif [ -n "$ZSH_VERSION" ]; then
         :
     else
@@ -95,15 +100,18 @@ stasetup::install_zsh () {
     git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 
     if [ -f "${HOME}/.zshrc" ]; then
+    local ZSHRC_BACKUP
     ZSHRC_BACKUP="${HOME}/.zshrc.backup"
     while [ -f "${ZSHRC_BACKUP}" ]; do
         ZSHRC_BACKUP="${ZSHRC_BACKUP}.backup"
     done
+    local ZSHRC_BACKUP_REL
     ZSHRC_BACKUP_REL=$(realpath --relative-to="${HOME}" "${ZSHRC_BACKUP}")
     echo "~/.zshrc exists, moving it to ~/${ZSHRC_BACKUP_REL}"
     mv ${HOME}/.zshrc ${ZSHRC_BACKUP}
     fi
 
+    local NO_ZSHRC
     NO_ZSHRC=false
     if [ -f "${HOME}/.zshrc" ]; then
     NO_ZSHRC=true
@@ -112,15 +120,17 @@ stasetup::install_zsh () {
     fi
 
     if [ -f "${HOME}/.p10k.zsh" ]; then
+    local P10K_BACKUP
     P10K_BACKUP="${HOME}/.p10k.zsh.backup"
     while [ -f "${P10K_BACKUP}" ]; do
         P10K_BACKUP="${P10K_BACKUP}.backup"
     done
+    local P10K_BACKUP_REL
     P10K_BACKUP_REL=$(realpath --relative-to="${HOME}" "${P10K_BACKUP}")
     echo "~/.p10k.zsh exists, moving it to ~/${P10K_BACKUP_REL}"
     mv ${HOME}/.p10k.zsh ${P10K_BACKUP}
     fi
-
+    local NO_P10K
     NO_P10K=false
     if [ -f "${HOME}/.p10k.zsh" ]; then
     NO_P10K=true 
@@ -144,7 +154,7 @@ stasetup::install_zsh () {
 }
 
 
-usage () {
+stasetup::usage () {
     echo "setup.sh [-hB]
     
     FLAGS:
@@ -155,13 +165,14 @@ usage () {
 
 # run if the script is directly executed (not sourced)
 if [ "${BASH_SOURCE[0]}" == "$0" ]; then 
+    local install_zsh
     install_zsh=true
     
     while getopts "hB" arg; do
         case $arg in
-            h) usage; exit 0;;
+            h) stasetup::usage; exit 0;;
             B) install_zsh=false;;
-            *) echo "invalid arguments"; usage; exit 1;;
+            *) echo "invalid arguments"; stasetup::usage; exit 1;;
         esac
     done
 
