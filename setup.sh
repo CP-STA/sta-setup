@@ -48,8 +48,7 @@ stasetup::install_brew () {
 
     $HOME/.linuxbrew/bin/brew update --force --quiet
     eval "$($HOME/.linuxbrew/bin/brew shellenv)"
-    brew install --force-bottle binutils
-    brew install --force-bottle gcc
+    brew install binutils gcc
     cd "$HOMEBREW_PREFIX/bin"
 
     add_to_rc 'eval "$($HOME/.linuxbrew/bin/brew shellenv)"'
